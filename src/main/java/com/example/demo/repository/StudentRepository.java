@@ -14,10 +14,13 @@ public interface StudentRepository extends JpaRepository<StudentEntity, Long> {
     Optional<StudentDto> findStudentByEmail(String studentEmail);
     @Query("select std from StudentEntity std where std.firstName =?1 and std.lastName = ?2")
     StudentDto findByJPQL(String firstName, String lastName);
-    @Query("select std from StudentEntity std where std.first_name =:firstName and std.last_name =:lastName")
+
+    @Query("select std from StudentEntity std where std.firstName = :firstName and std.lastName = :lastName")
     StudentDto findByJPQLParams(@Param("firstName") String firstName, @Param("lastName") String lastName);
+
     @Query(value = "select std from students std where std.first_name =?1 and std.last_name =?1", nativeQuery = true)
     StudentDto findByJPQLNativeQuery(String firstName, String lastName);
+
     @Query(value = "select std from students std where std.first_name =:firstName and std.last_name =:lastName", nativeQuery = true)
     StudentDto findByJPQLParamsNativeQuery(@Param("firstName") String firstName, @Param("lastName") String lastName);
 }
