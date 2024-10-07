@@ -12,6 +12,7 @@ import java.util.Optional;
 @Repository
 public interface StudentRepository extends JpaRepository<StudentEntity, Long> {
     Optional<StudentDto> findStudentByEmail(String studentEmail);
+
     @Query("select std from StudentEntity std where std.firstName =?1 and std.lastName = ?2")
     StudentDto findByJPQL(String firstName, String lastName);
 

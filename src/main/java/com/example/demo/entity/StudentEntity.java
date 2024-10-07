@@ -21,4 +21,6 @@ public class StudentEntity {
     private String lastName;
     @Column(nullable = false)
     private String email;
+    @Column(nullable = false)
+    private String address;
 }
