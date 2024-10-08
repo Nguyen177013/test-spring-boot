@@ -4,8 +4,8 @@ import com.example.demo.StudentDto.StudentDto;
 import com.example.demo.entity.StudentEntity;
 import com.example.demo.repository.StudentRepository;
 import com.example.demo.service.IStudentService;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.NullValueInNestedPathException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.Page;
@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.Objects;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class StudentServiceImp implements IStudentService {
     @Autowired
@@ -51,8 +52,8 @@ public class StudentServiceImp implements IStudentService {
     }
 
     @Override
-    public StudentDto updateStudent(StudentDto student) {
-        if(Objects.isNull(this.getStudentById(student.getId()))){
+    public StudentDto updateStudent(long studentId, StudentDto student) {
+        if(Objects.isNull(this.getStudentById(studentId))){
             throw new NullPointerException("student id does not exist");
         }
         ModelMapper modelMapper = new ModelMapper();
@@ -61,7 +62,13 @@ public class StudentServiceImp implements IStudentService {
     }
 
     @Override
-    public void deleteStudent(long studentId) {
-        this.repository.deleteById(studentId);
+    public boolean deleteStudent(long studentId) {
+        try{
+            this.repository.deleteById(studentId);
+            return true;
+        } catch(Exception ex){
+            log.error(ex.getMessage());
+            return false;
+        }
     }
 }

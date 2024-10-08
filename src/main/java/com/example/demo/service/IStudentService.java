@@ -11,6 +11,6 @@ public interface IStudentService {
     StudentDto createStudent(StudentDto student);
     Page<StudentEntity> getAllStudent(Pageable pageable);
     StudentDto getStudentById(long studentId);
-    StudentDto updateStudent(StudentDto studentDto);
-    void deleteStudent(long studentId);
+    StudentDto updateStudent(long studentId, StudentDto studentDto);
+    boolean deleteStudent(long studentId);
 }
