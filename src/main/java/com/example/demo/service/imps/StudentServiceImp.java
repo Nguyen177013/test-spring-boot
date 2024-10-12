@@ -23,7 +23,7 @@ public class StudentServiceImp implements IStudentService {
     StudentRepository repository;
 
     @Override
-    public StudentDto createStudent(StudentDto student) {
+    public StudentDto createStudent(StudentEntity student) {
         if(Objects.isNull(student.getEmail())){
             throw new NullPointerException("missing student email");
         }
@@ -52,13 +52,13 @@ public class StudentServiceImp implements IStudentService {
     }
 
     @Override
-    public StudentDto updateStudent(long studentId, StudentDto student) {
+    public StudentDto updateStudent(long studentId, StudentEntity student) {
         if(Objects.isNull(this.getStudentById(studentId))){
             throw new NullPointerException("student id does not exist");
         }
         ModelMapper modelMapper = new ModelMapper();
-        repository.save(modelMapper.map(student, StudentEntity.class));
-        return student;
+        repository.save(student);
+        return modelMapper.map(student, StudentDto.class);
     }
 
     @Override

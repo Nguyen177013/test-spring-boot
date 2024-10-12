@@ -20,7 +20,7 @@ public class StudentController {
 
     @GetMapping("create-student")
     @ResponseStatus(HttpStatus.CREATED)
-    public StudentDto createStudent(@RequestBody StudentDto student){
+    public StudentDto createStudent(@RequestBody StudentEntity student){
         return this.studentService.createStudent(student);
     }
 
@@ -39,7 +39,7 @@ public class StudentController {
     }
    @PatchMapping("update-student/{id}")
     public ResponseEntity<StudentDto> updateStudentById(@PathVariable("id") long studentId,
-                                                        @RequestBody StudentDto student){
+                                                        @RequestBody StudentEntity student){
         StudentDto studentDto = this.studentService.updateStudent(studentId, student);
        if(Objects.isNull(studentDto)){
            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

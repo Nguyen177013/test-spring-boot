@@ -8,9 +8,9 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 public interface IStudentService {
-    StudentDto createStudent(StudentDto student);
+    StudentDto createStudent(StudentEntity student);
     Page<StudentEntity> getAllStudent(Pageable pageable);
     StudentDto getStudentById(long studentId);
-    StudentDto updateStudent(long studentId, StudentDto studentDto);
+    StudentDto updateStudent(long studentId, StudentEntity studentEntity);
     boolean deleteStudent(long studentId);
 }
