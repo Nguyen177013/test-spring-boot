@@ -38,6 +38,7 @@ public class StudentServiceImp implements IStudentService {
 
     @Override
     public Page<StudentEntity> getAllStudent(Pageable pageable) {
+        var test = this.repository.findAll(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize()));
         return this.repository.findAll(PageRequest.of(pageable.getPageNumber(), pageable.getPageSize()));
     }
 

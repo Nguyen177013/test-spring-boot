@@ -25,7 +25,7 @@ public class StudentController {
     }
 
     @GetMapping("get-all-student")
-    public Page<StudentEntity> getAllStudent(@RequestParam Pageable pageable){
+    public Page<StudentEntity> getAllStudent(Pageable pageable){
         return this.studentService.getAllStudent(pageable);
     }
 
