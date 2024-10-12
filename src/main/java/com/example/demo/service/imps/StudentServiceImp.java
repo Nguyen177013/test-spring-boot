@@ -27,13 +27,13 @@ public class StudentServiceImp implements IStudentService {
         if(Objects.isNull(student.getEmail())){
             throw new NullPointerException("missing student email");
         }
-        Optional<StudentDto> newStudent = repository.findStudentByEmail(student.getEmail());
+        Optional<StudentEntity> newStudent = repository.findStudentByEmail(student.getEmail());
         if(newStudent.isPresent()){
             throw new DuplicateKeyException("student email already exists");
         }
         ModelMapper modelMapper = new ModelMapper();
         repository.save(modelMapper.map(student, StudentEntity.class));
-        return newStudent.get();
+        return modelMapper.map(newStudent, StudentDto.class);
     }
 
     @Override
