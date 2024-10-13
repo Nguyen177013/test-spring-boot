@@ -55,7 +55,7 @@ public class StudentServiceImp implements IStudentService {
     @Override
     public StudentDto updateStudent(long studentId, StudentEntity student) {
         if(Objects.isNull(this.getStudentById(studentId))){
-            throw new NullPointerException("student id does not exist");
+            return null;
         }
         ModelMapper modelMapper = new ModelMapper();
         repository.save(student);

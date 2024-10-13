@@ -18,7 +18,7 @@ public class StudentController {
     @Autowired
     private IStudentService studentService;
 
-    @GetMapping("create-student")
+    @PostMapping("create-student")
     @ResponseStatus(HttpStatus.CREATED)
     public StudentDto createStudent(@RequestBody StudentEntity student){
         return this.studentService.createStudent(student);
